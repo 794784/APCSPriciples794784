@@ -36,11 +36,11 @@ text ("PADDLE", 400, 200); //title
 textAlign(CENTER);
 
 text ("GAME", 400, 300);
-fill (78,219,18);//easy
+fill (200,23,32);//easy
 rect (50, 450, 200, 200); //easy
 fill (250, 250, 7); //med
 rect (300, 450, 200, 200);//med
-fill (250, 0, 0 );//hard
+fill (0, 250, 0 );//hard
 rect (550, 450, 200, 200);//hard
 fill(255);// instructions
 rect (200, 700, 400, 75);
