@@ -37,15 +37,16 @@ textAlign(CENTER);
 
 text ("GAME", 400, 300);
 fill (200,23,32);//easy
-rect (50, 450, 200, 200); //easy
+ellipse (150, 550, 200, 200); //easy
 fill (250, 250, 7); //med
-rect (300, 450, 200, 200);//med
+ellipse (400, 550, 200, 200);//med
 fill (0, 250, 0 );//hard
-rect (550, 450, 200, 200);//hard
+ellipse (650, 550, 200, 200);//hard
 fill(255);// instructions
-rect (200, 700, 400, 75);
+ellipse (400, 725, 400, 75);
 
 textSize (60);
+textFont('Georgia')
 text ("EASY", 55, 525, 200, 200);
 text ("HARD", 560, 525, 200, 200);
 textSize(45);
