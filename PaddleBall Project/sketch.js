@@ -1,5 +1,5 @@
-//  Your Name
-// 	Date or version number
+//  De'Andre Brown
+// 	09/24/19
 //  This is a comment
 //  The setup function function is called once when your program begins
 var balls = []; //declares array
