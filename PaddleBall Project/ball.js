@@ -3,74 +3,82 @@
 //  This is a comment
 //  The setup function function is called once when your program begins
 class Ball{
+  constructor(x,y,dx,dy,w,id){
+    this.loc= createVector(x,y);
+    this.vel = createVector(dx,dy);
+    this.clr = color(random(255),random(255),random(255));
+    this.acc=createVector(0,0.5);
+    this.w=20;
+    this.id=id;
 
-  constructor(x, y, dx, dy, id){
-    this.loc = createVector(x, y);
-    this.vel = createVector (dx, dy);
-    this.acc = createVector (0, .7);
-    this.id = id;
-    //this.clr = color(random(255), random(255), random(255));
   }
-
-run(){
-  this.checkEdges();
-  this.update();
-  this.render();
-  this.removeBall();
-  this.score();
-}
-
-checkEdges(){
-  if(this.loc.x< 0) {this.vel. x = -this.vel.x}
-  if (this.loc.x> width) this.vel.x = -this.vel.x;
-  if (this.loc.y < 0) this.vel.y = - this.vel.y;
-  if(this.loc.y> height) this.vel.y = -this.vel.y;
-}
-
-update(){
-  this.vel.add(this.acc);
-  this.loc.add(this.vel);
-}
-
-render(){
-// if (this.id === 15){
-//   fill (6,6,250);
-// }
-   if (this.id%2 === 0){ //makes half balls red
-    fill (250, 0, 0);
-  }else if (this.id%2 === 1){ //half the balls green
-    fill (0, 250, 0);
+  run(){
+    this.checkEdges();
+    this.render();
+    this.isColliding();
+    this.update();
   }
-  ellipse(this.loc.x, this.loc.y, 30, 30);
-}
-
-isColliding(){
-  if (this.loc.x> paddle.loc.x &&
-  this.loc.x < paddle.loc.x +paddle.w &&
-  this.loc.y > paddle.loc.y && this.loc.y < paddle.loc.y +paddle.h&&
-  this.vel.y>0){
-    return true;
-  } else{
-    return false;
-  }
-}
-
-removeBall(){
-  for (var i = balls.length-1; i >= 0; i--){
-    if (balls[i].isColliding()){
-      balls.splice(i, 1);
-
-      }
+  checkEdges(){
+    if(this.loc.x<0){
+      this.vel.x = -this.vel.x;
+    }
+    if(this.loc.x>width){
+      this.vel.x = -this.vel.x;
+    }
+    if(this.loc.y<0){
+      this.vel.y = -this.vel.y;
+      this.vel.y=this.vel.y+2
+    }
+    if(this.loc.y>height){
+      this.vel.y = -this.vel.y;
     }
   }
 
-
-score(){
-  if (this.isColliding()===true && this.id %2 === 1){
-    score ++;
-  }else if (this.isColliding() === true && this.id %2 ===0){
-    score--;
+  update(){
+    for(var i=balls.length-1;i>=0;i--){
+      if(balls[i].isColliding()){
+        if(this.vel.y>0){
+          balls.splice(i,1);
+          score=score+1;
+        }
+        if(this.vel.y<0){
+          balls.splice(i,1);
+          health=health-1;
+        }
+      }
+    }
+    this.loc.add(this.vel);
+    this.vel.limit(25)
+    this.vel.add(this.acc);
+    if(balls.length<=0&& iteration<=3&& health>0){
+      if(gameMode==='easy'){
+        loadObjects(5);
+      }
+      if(gameMode==='medium'){
+        loadObjects(10);
+      }
+      if(gameMode==='hard'){
+        loadObjects(25);
+      }
+      runBalls();
+      iteration=iteration+1;
+    }
   }
-}
+  render(){
+      fill(this.clr);
+      ellipse(this.loc.x, this.loc.y, this.w, this.w,this.id);
+    }
 
-}
+  isColliding(){
+    if(this.loc.x>paddle.loc.x&&
+        this.loc.x<paddle.loc.x+paddle.w&&
+        this.loc.y+(this.w/2)>paddle.loc.y&&
+        this.loc.y+(this.w/2)<paddle.loc.y+paddle.h){
+          return (true);
+        }else{
+          return (false);
+        }
+        }
+
+
+  }
