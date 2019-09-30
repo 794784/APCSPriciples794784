@@ -36,11 +36,11 @@ class Button{
     fill(this.clr);
     rect(this.loc.x,this.loc.y,this.w,this.h);
     fill(0,255,0);
-    text('Easy',175,700);
+    text('Difficult',150,700);
     fill(0,0,255);
-    text('Medium',350,700);
+    text('Hard',375,700);
     fill(255,0,0);
-    text('Hard',575,700);
+    text('Impossible',525,700);
   }
   checkEdges(){
     isTouching();
@@ -70,8 +70,8 @@ function startGame(){
   text('Select what difficulty mode youd like then the game will begin,',50,350);
   text('move the paddle with your mouse to hit the balls.',50,375);
   text('You have to try and have the balls only hit the top of the paddle.',50,400);
-  text('If the balls hits the top of the paddle, the score will go up by 1.',50,425);
-  text('If the balls hits the bottom of the paddle, health will drop.', 50,450);
+  text('If the balls hit the top of the paddle, the score will go up by 1.',50,425);
+  text('If the balls hit the bottom of the paddle, health will drop.', 50,450);
   text('If you got no more health you dead. If you survive its a dub.',50,475);
   //checks if user touches the box
   //moves to next screen
