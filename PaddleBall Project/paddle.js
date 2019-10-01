@@ -7,7 +7,7 @@ class Paddle{
     this.loc=createVector(x,y);
     this.w=w;
     this.h=h;
-    this.clr= color(255,0,0);
+    this.clr= color(0,0,300);
   }
 run(){
   this.render();

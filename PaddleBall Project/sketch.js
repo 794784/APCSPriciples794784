@@ -72,7 +72,7 @@ function startGame(){
   text('You have to try and have the balls only hit the top of the paddle.',50,400);
   text('If the balls hit the top of the paddle, the score will go up by 1.',50,425);
   text('If the balls hit the bottom of the paddle, health will drop.', 50,450);
-  text('If you got no more health you dead. If you survive its a dub.',50,475);
+  text('If you have no health left, thats a L. If you survive its a dub.',50,475);
   //checks if user touches the box
   //moves to next screen
   if(gameMode==='easy'||gameMode==='medium'||gameMode==='hard'){
@@ -141,12 +141,12 @@ function endGame(){
   if(win==='no'){
     textSize(100);
     fill(255,0,0);
-    text("You Lose!",200,400);
+    text("Its a L!",200,400);
   }
   if(win==='yes'){
     textSize(100);
     fill(255,0,0);
-    text("You Win!",200,400);
+    text("Its a Dub!",200,400);
   }
   fill(0,255,0);
   rect(300,600,50,50);
