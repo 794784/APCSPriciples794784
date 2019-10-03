@@ -141,12 +141,12 @@ function endGame(){
   if(win==='no'){
     textSize(100);
     fill(255,0,0);
-    text("Its a L!",200,400);
+    text("Its a L!",250,400);
   }
   if(win==='yes'){
     textSize(100);
     fill(255,0,0);
-    text("Its a Dub!",200,400);
+    text("Its a Dub!",225,400);
   }
   fill(0,255,0);
   rect(300,600,50,50);
