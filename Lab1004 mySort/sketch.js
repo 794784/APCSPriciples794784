@@ -7,6 +7,15 @@ function setup() {
   cnv.position((windowWidth-width)/2, 30);
   background(5, 5, 5);
   fill(200, 30, 150);
+  var list = [4, 8, 6, 3, 2, 9]
+  swap(list, 1, 2)
+  function swap(list, a, b){
+    if(a > b){
+      var temp = list[a];
+      list[a] = list[b];
+      list[b] = temp;
+    }
+  }
 
 
 }
