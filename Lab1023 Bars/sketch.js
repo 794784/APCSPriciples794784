@@ -2,7 +2,7 @@
 // 	Date or version number
 //  This is a comment
 //  The setup function function is called once when your program begins
-var bars=[0] ;
+var bars=[];
 var barWidth, barHeight;
 
 function setup() {
@@ -18,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-selectionSort(bars);
+bubblesort();
 }
 
 function loadBars(){
@@ -37,6 +37,15 @@ function  update(){
   background(0);
   for (var i =0; i<bars.length; i++){
     bars[i].run();
+  }
+}
+
+function bubblesort(){
+  for(var i = 0; i < bars.length-1; i++){
+    if(bars[i].h>bars[i+1].h){
+      swap(bars, i, i+1);
+      update();
+    }
   }
 }
 

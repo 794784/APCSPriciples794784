@@ -15,16 +15,8 @@ rect (this.loc.x, this.loc.y, this.w, this.h);
 
 run(){
   this.render();
-  this.update();
 }
 
-update(){
-
-}
-
-getHeight(){
-  return this.h;
-}
 set(i){
   this.loc.x=i*25;
 
