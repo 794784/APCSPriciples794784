@@ -22,4 +22,4 @@ isClicked(){ // to check if that button is pressed
 
 
 
-}///end button class
+}
