@@ -2,9 +2,6 @@
 // 	October 31, 2019
 //  This is a comment
 //  The setup function function is called once when your program begins
-//  Elena Campell
-// snake game
-//  The setup function function is called once when your program begins
 
 var snake, score, food, header_height;
 var bodySegments = [];
@@ -29,7 +26,7 @@ function draw(){
 
 function newGame(){ //create snake and food objects
   score = 0;
-  snake = new Snake (random(50, 750), random(50, 750),30, color(227, 69, 7));
+  snake = new Snake (random(50, 750), random(50, 750), color(227, 69, 7));
   food = new Food (random (300,500), random (300,500), color(70));
 
 
