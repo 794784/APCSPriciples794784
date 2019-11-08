@@ -75,9 +75,9 @@ function draw(){
   //how to play
       fill(255, 100 ,0);
       textSize(20);
-      text("The goal of the game is to become as long of a snake as you can.", 100, 625);
-      text( "If you hit one part of your snake with anohter, the game ends.", 100, 650);
-      text( "Beat your own highscore to win the game.", 100, 675);
+      text("You know how to play the snake game, you got it", 125, 625);
+      text( "Either you nice wit it or you not", 100, 650);
+      text( "Keep trying to beat your highscore", 100, 675);
   }
 
   function playGame(){
