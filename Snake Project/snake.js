@@ -3,76 +3,90 @@
 //  This is a comment
 //  The setup function function is called once when your program begins
 
-
 class Snake{
-  constructor(x,y,dx,dy){
-    this.head = createVector(x,y);
-    this.vel = createVector(dx,dy);
-    this.clr = color(random(255), random(255), random(255));
-    this.body = [];
-    this.loadSegment()
-  }
-
-  loadSegment(){
-    //load new body segment
-    this.body.push(createVector(0,0));
+  constructor(x,y,dx,dy,w,c){
+    this.loc=createVector(x,y);
+    this.vel=createVector(dx,dy);
+    this.w=w;
+    this.clr=c;
+    this.body=[];
   }
 
   run(){
-    //run update, checkEdges, and render functions
+    this.render();
     this.checkEdges();
     this.update();
-    this.render();
+    this.tangled();
+    this.hitFood();
   }
 
-  checkEdges(){
-//up arrow
-    if(keyCode===38){
-      this.vel.x = 0;
-      this.vel.y = -w;
-    }
-//down arrow
-    else if (keyCode===40) {
-      this.vel.x = 0;
-      this.vel.y = w;
-    }
-//left arrow
-    else if (keyCode===37) {
-      this.vel.x = -w;
-      this.vel.y = 0;
-    }
-//right arrow
-    else if (keyCode===39) {
-      this.vel.x = w;
-      this.vel.y = 0;
+  render(){
+    fill(this.clr);
+    rect(this.loc.x*this.w,this.loc.y*this.w,this.w,this.w);
+    for (var i=0; i<this.body.length; i++){
+      rect(this.body[i].x*this.w,this.body[i].y*this.w, this.w, this.w);
     }
   }
+
+checkEdges(){
+  //if hits left side
+  if(this.loc.x<0){
+    endGame='yes';
+  }
+  if(this.loc.x>width/this.w){
+    //if hits right side
+    endGame='yes';
+  }
+  if(this.loc.y<0){
+    //if hits top
+    endGame='yes';
+  }
+  if(this.loc.y>height/this.w){
+    //if hits bottom
+    endGame='yes';
+  }
+}
 
   update(){
-    //add segment
-    if(this.head.x === food.food.x &&
-       this.head.y === food.food.y){
-         this.loadSegment();
-       }
-    // update the body
-    for(var i = 0; i < this.body.length; i++){
-      this.body[0].x = this.head.x;
-      this.body[0].y = this.head.y;
-      this.body[i].x = this.body[i-1].x;
-      this.body[i].y = this.body[i-1].y;
+    if(keyIsPressed&&
+      keyCode===RIGHT_ARROW){
+        head.vel.x=1;
+        head.vel.y=0;
+      }
+      if(keyIsPressed&&
+        keyCode===LEFT_ARROW){
+          head.vel.x=-1;
+          head.vel.y=0;
+        }
+        if(keyIsPressed&&
+          keyCode===UP_ARROW){
+            head.vel.x=0;
+            head.vel.y=-1;
+          }
+          if(keyIsPressed&&
+            keyCode===DOWN_ARROW){
+              head.vel.x=0;
+              head.vel.y=1;
+            }
+    for (var i=this.body.length-1; i>0; i--){
+      this.body[i].x.add(this.vel.x);
+      this.body[i].y.add(this.vel.y);
     }
-    // update the head
-    this.head.add(this.vel);
+    head.loc.add(this.vel);
+
+  }
+
+tangled(){
 
 }
 
-  render(){
-  // render head
-  fill(this.clr);
-  rect(this.head.x, this.head.y, w, w);
-  // render the body
-  for(var i = 0; i < this.body.length; i++){
-    rect(this.body[i].x, this.body[i].y, w, w);
-    }
+hitFood(){
+  console.log(food[numberFood].loc.x);
+    if(head.loc.x===food[numberFood].loc.x&&
+        head.loc.y===food[numberFood].loc.y){
+          food.splice(numberFood,1);
+          this.body.push(createVector(head.loc.x,head.loc.y));
+          hitFood='yes';
   }
+    }
 }

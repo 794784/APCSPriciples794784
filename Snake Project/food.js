@@ -1,26 +1,23 @@
 class Food{
-  constructor(x,y){
-    this.food = createVector(x,y);
+  constructor(x,y,w,id){
+    this.loc=createVector(x,y);
+    this.w=w;
+    this.clr=color(0,255,0);
+    this.id=id;
   }
 
-run(){
-  //run update and render functions
-  this.update();
-  this.render();
-}
-
-update(){
-  //change location if snake and food touch
-  if(snake.head.x === this.food.x &&
-     snake.head.y === this.food.y){
-    this.food.x = Math.floor(random(0,79))*w;
-    this.food.y = Math.floor(random(0,79))*w;
+  run(){
+    this.render();
+    this.update();
   }
-}
 
-render(){
-  // render the food
-  fill(random(255), random(255), random(255));
-  rect(this.food.x, this.food.y, w, w);
+  render(){
+    fill(this.clr);
+    rect(this.loc.x*this.w,this.loc.y*this.w,this.w,this.w);
   }
+
+  update(){
+
+    }
+
 }

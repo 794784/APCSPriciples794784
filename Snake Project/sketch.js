@@ -3,115 +3,73 @@
 //  This is a comment
 //  The setup function function is called once when your program begins
 
-var gameState = 1
-var w = 10
-
+segments=[];
+numberFood=0;
+food=[];
+score=0;
 function setup() {
+  // put setup code here
   var cnv = createCanvas(800, 800);
   cnv.position((windowWidth-width)/2, 30);
-  // slow down snake movement
-  frameRate(1);
-  loadThings();
+  background(20, 20, 20);
+  endGame='no';
+  hitFood='no';
+  loadHead();
+  loadFood();
+  frameRate(14);
 }
 
-//creates snake and food
-function loadThings(){
-  snake = new Snake(Math.floor(random(0,79))*w, Math.floor(random(0,79))*w, w, w);
-  food = new Food(Math.floor(random(0,79))*w,Math.floor(random(0,79))*w);
+function draw() {
+  runSnake();
+  runFood();
+  if(hitFood==='yes'){
+    numberFood=numberFood+1;
+    addFood();
+    hitFood='no';
+  }
+//if (endGame==='yes'){
+  //remove();
+  //clear();
+//}
 }
 
-function runThings(){
-  food.run();
-  snake.run();
+function loadHead(){
+  head=new Snake(0,0,0,0,10,color(255,0,0));
 }
 
-//runs the snake and food classes
-function draw(){
-  background(5,5,5);
-    if(gameState === 1){
-      startGame()
-    }
-    else if(gameState === 2){
-        playGame()
-    }
-    else if(gameState === 3){
-        loseGame()
+function loadFood(){
+  food[0]= new Food(int(random(80)),int(random(80)),10,0);
+}
+
+function runFood(){
+  for (var i=0; i<food.length;i++){
+    food[i].run();
+  }
+}
+
+function runSnake(){
+  background(20,20,20);
+  head.run();
+}
+
+function addFood(){
+  for (var i=numberFood; i>0;i--){
+    if(food[i-1]===1){
+      food[i]= new Food(int(random(80)),int(random(80)),10,0);
     }
   }
-
-  function startGame(){
-      background(20,20,20);
-  //title
-      fill(250, 250, 250);
-      textSize(100);
-      text("Snake Game", 100, 300);
-  //easy
-        fill(0, 250, 0);
-        textSize(20);
-        text("Press E for Easy", 100, 500);
-         if (keyCode === 69) {
-           health = 3
-           score = 0
-           gameState = gameState + 1
-     }
-  //medium
-        fill(255,165,0);
-        textSize(20);
-        text("Press M for Medium", 325, 500);
-        if (keyCode === 77) {
-           health = 4
-           score = 0
-           gameState = gameState + 1
-       }
-  //hard
-        fill(255,0 ,0 );
-        textSize(20);
-        text("Press H for Hard", 600, 500);
-         if (keyCode === 72) {
-           health = 8
-           score = 0
-           gameState = gameState + 1
-      }
-  //how to play
-      fill(255, 100 ,0);
-      textSize(20);
-      text("You know how to play the snake game, you got it", 125, 625);
-      text( "Either you nice wit it or you not", 100, 650);
-      text( "Keep trying to beat your highscore", 100, 675);
-  }
-
-  function playGame(){
-      background(20,20,20);
-      runThings();
-//      if (snake touchs snake
-//          or snake touches the edge) {
-//          gameState = gameState + 1
-//       }
-    }
-
-function loseGame(){
-    background(20,20,20);
-//score
-    fill(0, 250, 0);
-    textSize(32);
-    text("Score: " + score, 650, 30);
-//lose
-    // if(highscore > new score){
-    fill(250, 250, 250);
-    textSize(100);
-    text("Try Again", 150, 300);
-// }
-//win
-    // if(highscore < new score){
-    fill(250, 250, 250);
-    textSize(100);
-    text("Try Again", 150, 300);
-  // }
-//restart
-    fill(250, 250, 250);
-    textSize(50);
-    text("To restart, press R", 200, 600);
-    if (keyCode === 82) {
-      gameState = 1
-    }
-  }
+}
+//function addSegments(){
+  //if(segments[numberFood-1].vel.x===3){
+    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x-segments[numberFood-1].w,segments[numberFood-1].loc.y,3,0,25,color(255,0,0),numberFood);
+  //}
+  //if(segments[numberFood-1].vel.x===-3){
+    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x+segments[numberFood-1].w,segments[numberFood-1].loc.y,-3,0,25,color(255,0,0),numberFood);
+  //}
+  //if(segments[numberFood-1].vel.y===3){
+    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x,segments[numberFood-1].loc.y-segments[numberFood-1].w,0,3,25,color(255,0,0),numberFood);
+  //}
+  //if(segments[numberFood-1].vel.y===-3){
+    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x,segments[numberFood-1].loc.y+segments[numberFood-1].w,0,-3,25,color(255,0,0),numberFood);
+  //}
+//}
