@@ -81,7 +81,7 @@ tangled(){
 }
 
 hitFood(){
-  console.log(food[numberFood].loc.x);
+  //console.log(food[numberFood].loc.x);
     if(head.loc.x===food[numberFood].loc.x&&
         head.loc.y===food[numberFood].loc.y){
           food.splice(numberFood,1);

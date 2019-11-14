@@ -34,7 +34,7 @@ function draw() {
 }
 
 function loadHead(){
-  head=new Snake(0,0,0,0,10,color(255,0,0));
+  head=new Snake(0,0,0,0,10,color(200,0,255));
 }
 
 function loadFood(){
