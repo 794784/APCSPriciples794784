@@ -7,11 +7,12 @@ segments=[];
 numberFood=0;
 food=[];
 score=0;
+gameState=1;
 function setup() {
   // put setup code here
   var cnv = createCanvas(800, 800);
   cnv.position((windowWidth-width)/2, 30);
-  background(20, 20, 20);
+  background(200, 0, 255);
   endGame='no';
   hitFood='no';
   loadHead();
@@ -20,56 +21,73 @@ function setup() {
 }
 
 function draw() {
+  if(gameState===1){
+    startScreen();
+  }
+  if(gameState===2){
+    playGame();
+  }
+  if(gameState===3){
+    finalScreen();
+  }
+}
+
+function startScreen(){
+  textSize(75);
+  fill(50, 50, 50);
+  text('Da Snake Game',125,200);
+  textSize(25);
+  fill(0,255,0)
+  text('Start',373,550);
+  rect(375,575,50,50);
+  fill(0,0,255);
+  if(mouseIsPressed&&
+      mouseX>375&&
+      mouseX<425&&
+      mouseY>575&&
+      mouseY<625){
+        clear();
+        gameState=2;
+      }
+}
+
+function playGame(){
   runSnake();
   runFood();
   if(hitFood==='yes'){
     numberFood=numberFood+1;
-    addFood();
     hitFood='no';
   }
-//if (endGame==='yes'){
-  //remove();
-  //clear();
-//}
+if (endGame==='yes'){
+  clear();
+  gameState=3;
+}
+}
+
+function finalScreen(){
+  background(20,20,20);
+  textSize(25);
+  fill(0,200,0);
+  text('you dead boy, your score was '+ numberFood, 225,400);
+  //if(keyIsPressed&&
+  //  keyCode===SHIFT){
+      //gameState=1;
+  //  }
 }
 
 function loadHead(){
-  head=new Snake(0,0,0,0,10,color(200,0,255));
+  head= new Snake(0,0,0,0,20,color(0, 0, 255));
 }
 
 function loadFood(){
-  food[0]= new Food(int(random(80)),int(random(80)),10,0);
+  food[0]= new Food(int(random(40)),int(random(40)),20,0);
 }
 
 function runFood(){
-  for (var i=0; i<food.length;i++){
-    food[i].run();
-  }
+  food[0].run();
 }
 
 function runSnake(){
-  background(20,20,20);
+  background(200, 0, 255);
   head.run();
 }
-
-function addFood(){
-  for (var i=numberFood; i>0;i--){
-    if(food[i-1]===1){
-      food[i]= new Food(int(random(80)),int(random(80)),10,0);
-    }
-  }
-}
-//function addSegments(){
-  //if(segments[numberFood-1].vel.x===3){
-    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x-segments[numberFood-1].w,segments[numberFood-1].loc.y,3,0,25,color(255,0,0),numberFood);
-  //}
-  //if(segments[numberFood-1].vel.x===-3){
-    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x+segments[numberFood-1].w,segments[numberFood-1].loc.y,-3,0,25,color(255,0,0),numberFood);
-  //}
-  //if(segments[numberFood-1].vel.y===3){
-    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x,segments[numberFood-1].loc.y-segments[numberFood-1].w,0,3,25,color(255,0,0),numberFood);
-  //}
-  //if(segments[numberFood-1].vel.y===-3){
-    //segments[numberFood]= new Snake(segments[numberFood-1].loc.x,segments[numberFood-1].loc.y+segments[numberFood-1].w,0,-3,25,color(255,0,0),numberFood);
-  //}
-//}
